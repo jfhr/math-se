@@ -1,0 +1,44 @@
+* {
+  padding: 4px;
+  width: 95%;
+
+  text-align: center;
+  align-content: center;
+  margin: 2px auto;
+
+  font-size: 24px;
+}
+
+.container {
+  border-radius: 8px;
+}
+
+input {
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+  border-bottom: 2px solid violet;
+
+  background: #253540;
+  color: inherit;
+}
+
+.exercise-value {
+  font-weight: bold;
+}
+
+.result-container {
+}
+
+.result {
+  width: 8%;
+  background: #a9b7c6;
+}
+
+.result-correct {
+  background: #16493c;
+}
+
+.result-false {
+  background: #530015;
+}
