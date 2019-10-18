@@ -18,5 +18,8 @@ steps:
 - script: |
     npm install -g @angular/cli
     npm install
+    ng lint
+    ng test
+    ng e2e
     ng build --prod
   displayName: 'npm install and build'
