@@ -41,12 +41,4 @@ steps:
 - task: CmdLine@2
   inputs:
     script: 'ng build --prod'
-
-- task: ArchiveFiles@2
-  inputs:
-    rootFolderOrFile: '$(Build.BinariesDirectory)'
-    includeRootFolder: true
-    archiveType: '7z'
-    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
-    replaceExistingArchive: true
-
+  displayName: 'Build for production'
