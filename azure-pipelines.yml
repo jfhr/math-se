@@ -19,25 +19,13 @@ steps:
   inputs:
     command: 'install'
   displayName: 'Install dependencies'
-
-- task: Npm@1
+- task: CmdLine@2
   inputs:
-    command: 'custom'
-    customCommand: 'run lint'
-  displayName: 'Lint code'
-
-- task: Npm@1
-  inputs:
-    command: 'custom'
-    customCommand: 'run test'
-  displayName: 'Run unit tests'
-
-- task: Npm@1
-  inputs:
-    command: 'custom'
-    customCommand: 'run e2e'
-  displayName: 'Run end-to-end tests'
-
+    script: |
+      ng lint
+      ng test --watch=false
+      ng e2e --watch=false
+  displayName: 'Run lint & tests'
 - task: CmdLine@2
   inputs:
     script: 'ng build --prod'
