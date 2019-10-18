@@ -15,11 +15,38 @@ steps:
     versionSpec: '10.x'
   displayName: 'Install Node.js'
 
-- script: |
-    npm install -g @angular/cli
-    npm install
-    ng lint
-    ng test
-    ng e2e
-    ng build --prod
-  displayName: 'npm install and build'
+- task: Npm@1
+  inputs:
+    command: 'install'
+  displayName: 'Install dependencies'
+
+- task: Npm@1
+  inputs:
+    command: 'custom'
+    customCommand: 'npm run lint'
+  displayName: 'Lint code'
+
+- task: Npm@1
+  inputs:
+    command: 'custom'
+    customCommand: 'run test'
+  displayName: 'Run unit tests'
+
+- task: Npm@1
+  inputs:
+    command: 'custom'
+    customCommand: 'run e2e'
+  displayName: 'Run end-to-end tests'
+
+- task: CmdLine@2
+  inputs:
+    script: 'ng build --prod'
+
+- task: ArchiveFiles@2
+  inputs:
+    rootFolderOrFile: '$(Build.BinariesDirectory)'
+    includeRootFolder: true
+    archiveType: '7z'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+    replaceExistingArchive: true
+
