@@ -31,3 +31,12 @@ steps:
   inputs:
     script: 'ng build --prod'
   displayName: 'Build for production'
+- task: CopyFilesOverSSH@0
+  inputs:
+    sshEndpoint: 'powersrvr connection'
+    sourceFolder: 'dist'
+    contents: '**'
+    targetFolder: '/var/www/static/f60ceb3d-8928-442b-9093-e8eaababc28e'
+    cleanTargetFolder: true
+    failOnEmptySource: true
+  displayName: 'Copy to server'
