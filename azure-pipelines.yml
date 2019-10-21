@@ -34,7 +34,7 @@ steps:
 - task: CopyFilesOverSSH@0
   inputs:
     sshEndpoint: 'powersrvr connection'
-    sourceFolder: 'dist'
+    sourceFolder: 'dist/math-training'
     contents: '**'
     targetFolder: '/var/www/f60ceb3d-8928-442b-9093-e8eaababc28e'
     cleanTargetFolder: true
