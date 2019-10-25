@@ -1,12 +1,17 @@
-<div>
+<div (keyup.arrowLeft)="previousExplanationStep()" (keyup.arrowRight)="nextExplanationStep()">
 
-  <div *ngIf="showExercise" class="input-group">
+  <div class="mb-3">
+    <h2>Binary addition</h2>
+    <div>Add the two binary numbers together and submit your result as a binary number.</div>
+  </div>
+
+  <div *ngIf="showExercise" class="input-group my-3">
     <div class="col-form-label">
       <form (submit)="submitAnswer(answer)">
-        (<b class="mx-1">{{ exercise.firstSummand }}</b>)
+        (<b class="mx-1">{{ formatNumber(exercise.firstSummand) }}</b>)
         <sub class="mx-1">{{ exercise.base }}</sub>
         <span class="mx-1">+</span>
-        (<b class="mx-1">{{ exercise.secondSummand }}</b>)
+        (<b class="mx-1">{{ formatNumber(exercise.secondSummand) }}</b>)
         <sub class="mx-1">{{ exercise.base }}</sub>
         <span class="mx-1">=</span>
         <label>
@@ -16,7 +21,7 @@
     </div>
   </div>
 
-  <div *ngIf="showResult">
+  <div *ngIf="showResult" class="my-3">
     <div *ngIf="result.correct" class="alert alert-success">
       Correct!
     </div>
@@ -25,7 +30,7 @@
     </div>
   </div>
 
-  <div *ngIf="showExplanation">
+  <div *ngIf="showExplanation" class="my-3">
     <div class="card">
 
       <div class="card-header">
@@ -65,6 +70,7 @@
           </table>
 
           <div class="mx-4">
+            <div>Add all the digits in the current row together.</div>
             <div>{{explanationStep.hint.calc}}</div>
             <div class="text-warning">{{explanationStep.hint.carry}}</div>
             <div *ngIf="explanationStep.hint.done" class="text-success">done!</div>
@@ -73,16 +79,20 @@
         </div>
       </div>
 
-      <div class="card-footer">
+      <div appAutoFocusOnShow class="card-footer">
         <button (click)="previousExplanationStep()" [disabled]="previousExplanationStepDisabled" class="btn">
-          Previous
+          ◀ Previous
         </button>
         <button (click)="nextExplanationStep()" [disabled]="nextExplanationStepDisabled" class="btn">
-          Next
+          Next ▶
         </button>
       </div>
 
     </div>
+  </div>
+
+  <div class="my-3">
+    <div (click)="newExercise()" class="btn btn-secondary">New exercise</div>
   </div>
 
 </div>

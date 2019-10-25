@@ -6,18 +6,27 @@ import {Component} from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'math-training';
   public switchThemeMessage;
+  private params: URLSearchParams;
 
   constructor() {
+    // we read the user's theme preference from the url query params
+    // use location.hash instead of location.search to avoid reload on set
+    this.params = new URLSearchParams(location.search);
     this.setSwitchThemeMessage();
   }
 
   public toggleTheme() {
-    if (localStorage.getItem('theme') === 'dark') {
-      localStorage.setItem('theme', 'light');
+    if (this.params.get('theme') === 'dark') {
+      this.params.set('theme', 'light');
     } else {
-      localStorage.setItem('theme', 'dark');
+      this.params.set('theme', 'dark');
+    }
+    const newHref = `${location.pathname}?${this.params.toString()}`;
+    if (history.state !== undefined) {
+      history.replaceState(history.state.data, history.state.title, newHref);
+    } else {
+      history.replaceState(undefined, undefined, newHref);
     }
     this.setSwitchThemeMessage();
     // @ts-ignore
@@ -25,7 +34,7 @@ export class AppComponent {
   }
 
   private setSwitchThemeMessage() {
-    if (localStorage.getItem('theme') === 'dark') {
+    if (this.params.get('theme') === 'dark') {
       this.switchThemeMessage = 'lights on';
     } else {
       this.switchThemeMessage = 'lights off';

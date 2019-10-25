@@ -3,12 +3,34 @@
 <head>
   <base href="./">
   <meta charset="utf-8">
+  <meta content="Tools for learning math for software engineers" name="math for software engineers">
   <title>math for software engineers</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <script>
+      function loadCss() {
+          let theme = new URLSearchParams(location.search).get('theme');
+          let url = 'assets';
+          if (theme === 'dark') {
+              // make it dark immediately to avoid white flash while css is loading
+              document.addEventListener('load', () => document.body.style.background = "rgb(41,41,41)");
+              url += '/darkly.bootstrap.min.css';
+          } else {
+              url += '/flatly.bootstrap.min.css';
+          }
+          const link = document.createElement('link');
+          link.href = url;
+          link.type = 'text/css';
+          link.rel = 'stylesheet';
+          link.media = 'screen,print';
+          document.head.appendChild(link);
+      }
+
+      loadCss();
+  </script>
 </head>
 <body>
-  <app-root></app-root>
+<app-root></app-root>
 </body>
 </html>
