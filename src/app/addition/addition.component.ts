@@ -34,6 +34,8 @@ export class AdditionComponent {
     this.exercise = generated.exercise;
     this.explanation = generated.explanation;
     this.showExercise = true;
+    this.showExplanation = false;
+    this.showResult = false;
   }
 
   /**

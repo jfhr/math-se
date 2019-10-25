@@ -14,6 +14,13 @@ export class AdditionExerciseGenerator {
       base, firstSummand, secondSummand
     };
 
+    const explanation = this.generateExplanationForExercise(exercise);
+
+    return {explanation, exercise};
+  }
+
+  public generateExplanationForExercise(exercise: AdditionExercise) {
+    const {firstSummand, secondSummand, base} = exercise;
     const resultLength = Math.max(firstSummand.length, secondSummand.length) + 2;
     const explanation: AdditionExplanation = {
       steps: []
@@ -32,6 +39,10 @@ export class AdditionExerciseGenerator {
       const firstDigit = step.firstSummand[index];
       const secondDigit = step.secondSummand[index];
       const carryDigit = step.carry[index];
+      // skip the last step if there's nothing left and no carry.
+      if (index === 1 && carryDigit.value === '') {
+        continue;
+      }
       const result = sum(firstDigit.value, secondDigit.value, carryDigit.value).withBase(base);
       firstDigit.cssClass = 'text-warning';
       secondDigit.cssClass = 'text-warning';
@@ -63,7 +74,7 @@ export class AdditionExerciseGenerator {
     // Add 'done' message to the last step.
     explanation.steps[explanation.steps.length - 1].hint.done = true;
 
-    return {explanation, exercise};
+    return explanation;
   }
 
   public getResult(exercise: AdditionExercise, answer: string): AdditionResult {

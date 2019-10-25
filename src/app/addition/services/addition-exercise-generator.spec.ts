@@ -31,4 +31,25 @@ describe('addition-exercise-generator', () => {
     expect(result.correct).toBeTruthy();
   });
 
+  it('should generate an explanation with the correct number of steps', () => {
+    const target = new AdditionExerciseGenerator();
+    const {exercise, explanation} = target.generateExercise();
+    const numericResult = sum(exercise.firstSummand, exercise.secondSummand).withBase(exercise.base);
+    // initial step + 1 step for every digit of the result
+    const expectedSteps = numericResult.length + 1;
+
+    expect(explanation.steps.length).toEqual(expectedSteps);
+  });
+
+  it('should not generate a final carry step if there\'s nothing to carry', () => {
+    const target = new AdditionExerciseGenerator();
+
+    const explanation = target.generateExplanationForExercise({
+      firstSummand: '10001100', secondSummand: '1000', base: 2
+    });
+    const expectedSteps = 9;
+
+    expect(explanation.steps.length).toEqual(expectedSteps);
+  });
+
 });
