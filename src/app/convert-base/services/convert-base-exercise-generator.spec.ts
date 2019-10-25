@@ -1,5 +1,4 @@
 import {ConvertBaseExerciseGenerator} from './convert-base-exercise-generator';
-import {convert} from './base-converter';
 
 describe('convert-base-exercise-generator', () => {
 
@@ -18,8 +17,6 @@ describe('convert-base-exercise-generator', () => {
       expect([2, 4, 8]).toContain(exercise.sourceBase);
       expect([2, 4, 8]).toContain(exercise.expectedBase);
       expect(exercise.sourceBase).not.toEqual(exercise.expectedBase);
-      const shouldBeExpected = convert(exercise.source).fromBase(exercise.sourceBase).toBase(exercise.expectedBase);
-      expect(exercise.expected).toEqual(shouldBeExpected);
     }
   });
 

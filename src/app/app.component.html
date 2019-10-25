@@ -1,6 +1,27 @@
-<router-outlet></router-outlet>
-<footer>
-  <div style="display:flex;justify-content:center;align-items:flex-end;font-size:1em;">
-    <a href="https://github.com/jfhr" referrerpolicy="no-referrer" target="_blank">made by jfhr</a>
+<header class="navbar navbar-expand navbar-dark bg-primary p-0 mb-3">
+  <div class="container">
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/">
+            🏠 Homepage
+          </a>
+        </li>
+        <li class="nav-item">
+          <a (click)="toggleTheme()" class="nav-link">
+            💡 {{switchThemeMessage}}
+          </a>
+        </li>
+      </ul>
+    </div>
   </div>
+</header>
+
+<main class="container">
+  <router-outlet></router-outlet>
+</main>
+
+<footer class="navbar fixed-bottom justify-content-center">
+  Tools for learning math for software engineers.&nbsp;
+  <a href="https://github.com/jfhr" referrerpolicy="no-referrer" target="_blank">made by jfhr</a>
 </footer>

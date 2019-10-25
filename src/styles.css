@@ -1,10 +1,5 @@
-/* You can add global styles to this file, and also import other style files */
-* {
-  background: #202030;
-  color: lightgray;
-  font-family: "Courier New", Courier, monospace;
-}
-
-.hidden {
-  display: none;
-}
+/**
+Global styles are defined in the respective bootstrap.css file.
+The file for the user's selected theme is loaded in the method
+loadCss() of the AppModule class.
+ */

@@ -27,7 +27,27 @@ class NumberRepresentationWithFromBase {
     return i.toString(base);
   }
 
-  public toInt(): number {
+  public toNumber(): number {
     return parseInt(this.n, this.base);
+  }
+}
+
+export function sum(...values: string[]) {
+  return new NumberRepresentationSum(values);
+}
+
+class NumberRepresentationSum {
+  constructor(private values: string[]) {
+  }
+
+  public withBase(base: number): string {
+    let s = 0;
+    for (const value of this.values) {
+      const n = convert(value).fromBase(base).toNumber();
+      if (!isNaN(n)) {
+        s += n;
+      }
+    }
+    return convert(s).toBase(base);
   }
 }

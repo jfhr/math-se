@@ -5,9 +5,12 @@ import {AppComponent} from './app.component';
 import {ConvertBaseComponent} from './convert-base/convert-base.component';
 import {RouterModule, Routes} from '@angular/router';
 import {NavigatorComponent} from './navigator/navigator.component';
+import {AdditionComponent} from './addition/addition.component';
+import {AdditionExerciseGenerator} from './addition/services/addition-exercise-generator';
 
 const appRoutes: Routes = [
   {path: 'convert-base', component: ConvertBaseComponent},
+  {path: 'addition-base', component: AdditionComponent},
   {path: '**', component: NavigatorComponent},
 ];
 
@@ -15,13 +18,16 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     NavigatorComponent,
-    ConvertBaseComponent
+    ConvertBaseComponent,
+    AdditionComponent,
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [],
+  providers: [
+    AdditionExerciseGenerator
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

@@ -1,0 +1,88 @@
+<div>
+
+  <div *ngIf="showExercise" class="input-group">
+    <div class="col-form-label">
+      <form (submit)="submitAnswer(answer)">
+        (<b class="mx-1">{{ exercise.firstSummand }}</b>)
+        <sub class="mx-1">{{ exercise.base }}</sub>
+        <span class="mx-1">+</span>
+        (<b class="mx-1">{{ exercise.secondSummand }}</b>)
+        <sub class="mx-1">{{ exercise.base }}</sub>
+        <span class="mx-1">=</span>
+        <label>
+          <input #answer autofocus class="input-group-text mx-1" type="text">
+        </label>
+      </form>
+    </div>
+  </div>
+
+  <div *ngIf="showResult">
+    <div *ngIf="result.correct" class="alert alert-success">
+      Correct!
+    </div>
+    <div *ngIf="!result.correct" class="alert alert-danger">
+      Wrong. See the explanation below.
+    </div>
+  </div>
+
+  <div *ngIf="showExplanation">
+    <div class="card">
+
+      <div class="card-header">
+        Explanation: pen-and-paper addition
+      </div>
+
+      <div class="card-body justify-content-center">
+        <div class="row">
+
+          <table class="mx-4 align-content-center">
+            <tbody>
+            <tr class="answer-arg">
+              <td class="mx-3"></td>
+              <td *ngFor="let digit of explanationStep.firstSummand" class="mx-3">
+                <span [classList]="digit.cssClass">{{digit.value}}</span>
+              </td>
+            </tr>
+            <tr class="answer-arg">
+              <td class="mx-3">+</td>
+              <td *ngFor="let digit of explanationStep.secondSummand" class="mx-3">
+                <span [classList]="digit.cssClass">{{digit.value}}</span>
+              </td>
+            </tr>
+            <tr class="answer-carry">
+              <td class="mx-3"></td>
+              <td *ngFor="let digit of explanationStep.carry" class="mx-3">
+                <span *ngIf="digit.isVisible" [classList]="digit.cssClass">{{digit.value}}</span>
+              </td>
+            </tr>
+            <tr class="answer-result">
+              <td class="mx-3"></td>
+              <td *ngFor="let digit of explanationStep.result" class="mx-3">
+                <span *ngIf="digit.isVisible" [classList]="digit.cssClass">{{digit.value}}</span>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+
+          <div class="mx-4">
+            <div>{{explanationStep.hint.calc}}</div>
+            <div class="text-warning">{{explanationStep.hint.carry}}</div>
+            <div *ngIf="explanationStep.hint.done" class="text-success">done!</div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="card-footer">
+        <button (click)="previousExplanationStep()" [disabled]="previousExplanationStepDisabled" class="btn">
+          Previous
+        </button>
+        <button (click)="nextExplanationStep()" [disabled]="nextExplanationStepDisabled" class="btn">
+          Next
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+</div>

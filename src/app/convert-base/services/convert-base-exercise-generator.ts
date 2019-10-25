@@ -18,7 +18,7 @@ export class ConvertBaseExerciseGenerator {
     if (answer === this.cheatCode) {
       return true;
     }
-    const n = convert(answer).fromBase(exercise.expectedBase).toInt();
+    const n = convert(answer).fromBase(exercise.expectedBase).toNumber();
     return n === exercise.value;
   }
 

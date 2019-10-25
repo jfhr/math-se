@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
-import {ConvertBaseExerciseGenerator, Exercise} from '../../services/convert-base-exercise-generator';
-import {MsToWidthConverter} from '../../services/ms-to-width-converter';
+import {ConvertBaseExerciseGenerator, Exercise} from './services/convert-base-exercise-generator';
+import {MsToWidthConverter} from './services/ms-to-width-converter';
 
 @Component({
   selector: 'app-convert-base',
