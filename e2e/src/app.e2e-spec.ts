@@ -1,16 +1,15 @@
-import { AppPage } from './app.po';
-import { browser, logging } from 'protractor';
+import {AppPage} from './app.po';
+import {browser, logging} from 'protractor';
 
-describe('workspace-project App', () => {
+describe('math-training App', () => {
   let page: AppPage;
 
   beforeEach(() => {
     page = new AppPage();
   });
 
-  it('should display welcome message', () => {
+  it('should work', () => {
     page.navigateTo();
-    expect(page.getTitleText()).toEqual('math-training app is running!');
   });
 
   afterEach(async () => {
@@ -20,4 +19,5 @@ describe('workspace-project App', () => {
       level: logging.Level.SEVERE,
     } as logging.Entry));
   });
+
 });
