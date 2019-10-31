@@ -5,8 +5,9 @@ import {AppComponent} from './app.component';
 import {ConvertBaseComponent} from './convert-base/convert-base.component';
 import {RouterModule, Routes} from '@angular/router';
 import {NavigatorComponent} from './navigator/navigator.component';
-import {AdditionComponent, AutoFocusOnShowDirective} from './addition/addition.component';
+import {AdditionComponent} from './addition/addition.component';
 import {AdditionExerciseGenerator} from './addition/services/addition-exercise-generator';
+import {AutoFocusOnShowDirective} from './directives';
 
 const appRoutes: Routes = [
   {path: 'convert-base', component: ConvertBaseComponent},

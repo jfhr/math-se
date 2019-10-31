@@ -1,6 +1,7 @@
-import {convert, sum} from '../../convert-base/services/base-converter';
-import {randomInt} from './random-int';
-import {deepCopy} from './deep-copy';
+import {convert, sum} from '../../services/base-converter';
+import {randomInt} from '../../services/random-int';
+import {deepCopy} from '../../services/deep-copy';
+import {Digit, Result} from '../../services/exercise-component';
 
 export class AdditionExerciseGenerator {
   public generateExercise(): AdditionExerciseWithExplanation {
@@ -77,7 +78,7 @@ export class AdditionExerciseGenerator {
     return explanation;
   }
 
-  public getResult(exercise: AdditionExercise, answer: string): AdditionResult {
+  public getResult(exercise: AdditionExercise, answer: string): Result {
     const firstNumber = convert(exercise.firstSummand).fromBase(exercise.base).toNumber();
     const secondNumber = convert(exercise.secondSummand).fromBase(exercise.base).toNumber();
     const expectedNumber = firstNumber + secondNumber;
@@ -134,18 +135,6 @@ export interface AdditionExerciseWithExplanation {
 }
 
 /**
- * A single digit represented in an explanation, with optional highlighting
- */
-export interface Digit {
-  /** The value of the digit as a single character */
-  value: string;
-  /** Indicates whether the digit should be visible */
-  isVisible: boolean;
-  /** If set, indicates the css-class of the digit for highlighting */
-  cssClass: string;
-}
-
-/**
  * An addition exercise that the user might solve
  */
 export interface AdditionExercise {
@@ -155,14 +144,6 @@ export interface AdditionExercise {
   firstSummand: string;
   /** The second summand in the correct base */
   secondSummand: string;
-}
-
-/**
- * The result of an addition exercise, in relation to an answer by the user
- */
-export interface AdditionResult {
-  /** Indicates whether the user's answer was correct. */
-  correct: boolean;
 }
 
 /**
@@ -193,7 +174,7 @@ export interface AdditionExplanationStep {
 }
 
 /**
- * Provides hints for what happened in a sinle explanation step
+ * Provides hints for what happened in a single explanation step
  */
 export interface AdditionExplanationHint {
   /** The digit-wise calculation performed in this step */

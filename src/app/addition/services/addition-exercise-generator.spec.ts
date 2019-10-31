@@ -1,5 +1,5 @@
 import {AdditionExerciseGenerator} from './addition-exercise-generator';
-import {convert, sum} from '../../convert-base/services/base-converter';
+import {convert, sum} from '../../services/base-converter';
 
 describe('addition-exercise-generator', () => {
 
