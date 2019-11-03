@@ -1,8 +1,14 @@
-import {Digit} from '../../services/exercise-component';
+import {Digit, Generator, Result} from '../../services/exercise-component';
 import {randomInt} from '../../services/random-int';
 import {convert} from '../../services/base-converter';
+import {stringifyNumber} from '../../services/stringify-number';
+import {deepCopy} from '../../services/deep-copy';
 
-export class MultiplicationExerciseGenerator {
+export class MultiplicationExerciseGenerator extends Generator<MultiplicationExercise, MultiplicationExplanationStep> {
+  constructor() {
+    super();
+  }
+
   public generateExercise(): MultiplicationExerciseWithExplanation {
     const base = 2;  // TODO inject base
     const firstNumber = randomInt(1, 256);
@@ -17,19 +23,60 @@ export class MultiplicationExerciseGenerator {
     return {explanation, exercise};
   }
 
+  public getResult(exercise: MultiplicationExercise, answer: string): Result {
+    const firstNumber = convert(exercise.firstFactor).fromBase(exercise.base).toNumber();
+    const secondNumber = convert(exercise.firstFactor).fromBase(exercise.base).toNumber();
+    const expectedNumber = firstNumber * secondNumber;
+    const actualNumber = convert(answer).fromBase(exercise.base).toNumber();
+    return {correct: expectedNumber === actualNumber};
+  }
+
   private generateExplanationForExercise(exercise: MultiplicationExercise): MultiplicationExplanation {
-    const {firstFactor, secondFactor, base} = exercise;
+    let {firstFactor, secondFactor} = exercise;
+    const {base} = exercise;
     const steps: MultiplicationExplanationStep[] = [];
+
+    const resultLength = firstFactor.length + secondFactor.length + 1;
+    const step: MultiplicationExplanationStep = {
+      hint: '',
+      firstFactor: this.toDigitArray(resultLength, firstFactor),
+      secondFactor: this.toDigitArray(resultLength, secondFactor),
+      lines: []
+    };
 
     // if the first factor has at least two more set digits than the second,
     // we switch the two to make the calculation simpler.
     const setDigitsDelta = this.getSetDigits(firstFactor) - this.getSetDigits(secondFactor);
     const switchFactors = setDigitsDelta > 1;
-    steps.push({
-      hint: 'The first factor has a lot more set digits than the second. ' +
-        'We switch the two factors to make the calculation easier.'
-    });
+    if (switchFactors) {
+      step.hint = 'The first factor has a lot more set digits than the second. ' +
+        'We switch the two factors to make the calculation easier.';
+      steps.push(deepCopy(step));
+      // swap the factors
+      secondFactor = [firstFactor, firstFactor = secondFactor][0];
+    }
 
+    step.hint = 'Go through the digits of the second factor from left to right.';
+    steps.push(deepCopy(step));
+
+    let idx = 1;
+    for (const digit of secondFactor) {
+      step.hint = `The ${stringifyNumber(idx)} digit of the second factor is 0.`;
+      if (digit === '0') {
+        step.hint += 'Continue to the next digit.';
+      } else {
+        const newLine: Digit[] = [];
+        for (let i = 0; i < idx; i++) {
+          newLine.push({value: ' ', isVisible: false, cssClass: ''});
+        }
+        // TODO for base !== 2, we may have to do this multiple times.
+        newLine.push(...step.secondFactor);
+        step.lines.push(newLine);
+      }
+
+      steps.push(deepCopy(step));
+      idx++;
+    }
 
     return {switchFactors, steps};
   }
@@ -40,8 +87,8 @@ export class MultiplicationExerciseGenerator {
    */
   private getSetDigits(value: string): number {
     let set = 0;
-    for (const char of value) {
-      if (char !== '0') {
+    for (const digit of value) {
+      if (digit !== '0') {
         set++;
       }
     }
@@ -86,15 +133,14 @@ export interface MultiplicationExplanation {
   switchFactors: boolean;
 }
 
-export interface MultiplicationExplanationHint {
-  message: string;
-}
-
 /**
  * A single step in the explanation of an multiplication exercise
  */
 export interface MultiplicationExplanationStep {
+  firstFactor: Digit[];
+  secondFactor: Digit[];
   /** The lines represent the summands we got from the pen-and-paper calculation. */
-  lines: Digit[][];
-  hint: MultiplicationExplanationHint;
+  lines?: Digit[][];
+  /** Hint for the user */
+  hint: string;
 }

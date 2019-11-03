@@ -17,10 +17,29 @@ export interface Explanation<TExplanationStep> {
   steps: TExplanationStep[];
 }
 
-export interface Generator<TExercise, TExplanationStep> {
-  generateExercise(): { exercise: TExercise, explanation: Explanation<TExplanationStep> };
+export abstract class Generator<TExercise, TExplanationStep> {
+  abstract generateExercise(): { exercise: TExercise, explanation: Explanation<TExplanationStep> };
 
-  getResult(exercise: TExercise, answer: string): Result;
+  abstract getResult(exercise: TExercise, answer: string): Result;
+
+  protected toDigitArray(length: number, value: string, cssClass: string = '', isVisible: boolean = false): Digit[] {
+    const digits: Digit[] = [];
+    for (let fill = length - value.length; fill > 0; fill--) {
+      digits.push({value: '', cssClass, isVisible});
+    }
+    for (const c of value) {
+      digits.push({value: c, cssClass, isVisible});
+    }
+    return digits;
+  }
+
+  protected ensureDigit(digit: string) {
+    if (digit.length === 1) {
+      return digit;
+    } else {
+      return '0';
+    }
+  }
 }
 
 /**

@@ -1,9 +1,9 @@
 import {convert, sum} from '../../services/base-converter';
 import {randomInt} from '../../services/random-int';
 import {deepCopy} from '../../services/deep-copy';
-import {Digit, Result} from '../../services/exercise-component';
+import {Digit, Generator, Result} from '../../services/exercise-component';
 
-export class AdditionExerciseGenerator {
+export class AdditionExerciseGenerator extends Generator<AdditionExercise, AdditionExplanationStep> {
   public generateExercise(): AdditionExerciseWithExplanation {
     const base = 2;  // TODO inject allowed bases
     const firstNumber = randomInt(1, 256);
@@ -84,25 +84,6 @@ export class AdditionExerciseGenerator {
     const expectedNumber = firstNumber + secondNumber;
     const actualNumber = convert(answer).fromBase(exercise.base).toNumber();
     return {correct: expectedNumber === actualNumber};
-  }
-
-  private toDigitArray(length: number, value: string, cssClass: string = '', isVisible: boolean = false): Digit[] {
-    const digits: Digit[] = [];
-    for (let fill = length - value.length; fill > 0; fill--) {
-      digits.push({value: '', cssClass, isVisible});
-    }
-    for (const c of value) {
-      digits.push({value: c, cssClass, isVisible});
-    }
-    return digits;
-  }
-
-  private ensureDigit(digit: string) {
-    if (digit.length === 1) {
-      return digit;
-    } else {
-      return '0';
-    }
   }
 
   private getHint(firstDigit: string, secondDigit: string, carry: string, result: string): AdditionExplanationHint {
