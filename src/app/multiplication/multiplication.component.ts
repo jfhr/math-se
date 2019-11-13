@@ -6,6 +6,5 @@ import {MultiplicationExercise, MultiplicationExplanationStep} from './services/
   templateUrl: './multiplication.component.html',
   styleUrls: ['./multiplication.component.css']
 })
-export class MultiplicationComponent extends ExerciseComponent<MultiplicationExercise,
-  MultiplicationExplanationStep> {
+export class MultiplicationComponent extends ExerciseComponent<MultiplicationExercise, MultiplicationExplanationStep> {
 }

@@ -1,0 +1,87 @@
+<div (keyup.arrowLeft)="previousExplanationStep()" (keyup.arrowRight)="nextExplanationStep()">
+
+  <div class="mb-3">
+    <h2>Euclidean Algorithm</h2>
+    <div>Find the greatest common divisor of the two numbers by hand using the euclidean algorithm.</div>
+  </div>
+
+  <div *ngIf="showExercise" class="input-group my-3">
+    <div class="col-form-label">
+      <form (submit)="submitAnswer(answer)">
+        <span class="mx-1">gcd(</span>
+        <b class="mx-1">{{ exercise.firstNumber }}</b>
+        <span class="mx-1">,</span>
+        <b class="mx-1">{{ exercise.secondNumber }}</b>
+        <span class="mx-1">) =</span>
+        <label>
+          <input #answer autofocus class="input-group-text mx-1" type="text">
+        </label>
+      </form>
+    </div>
+  </div>
+
+  <div *ngIf="showResult" class="my-3">
+    <div *ngIf="result.correct" class="alert alert-success">
+      Correct!
+    </div>
+    <div *ngIf="!result.correct" class="alert alert-danger">
+      Wrong. See the explanation below.
+    </div>
+  </div>
+
+  <div *ngIf="showExplanation" class="my-3">
+    <div class="card">
+
+      <div class="card-header">
+        Explanation: pen-and-paper addition
+      </div>
+
+      <div class="card-body justify-content-center">
+        <div class="row">
+
+          <table class="mx-4 align-content-center">
+            <tbody>
+            <tr class="answer-arg" *ngFor="let row of explanationStep.rows">
+              <td *ngIf="row.dividend.isVisible">
+                <span [classList]="row.dividend.cssClass">{{row.dividend.value}}</span>
+              </td>
+              <td><span> = </span></td>
+              <td *ngIf="row.result.isVisible">
+                <span [classList]="row.result.cssClass">{{row.result.value}}</span>
+              </td>
+              <td><span> * </span></td>
+              <td *ngIf="row.divisor.isVisible">
+                <span [classList]="row.divisor.cssClass">{{row.divisor.value}}</span>
+              </td>
+              <td><span> + </span></td>
+              <td *ngIf="row.rest.isVisible">
+                <span [classList]="row.rest.cssClass">{{row.rest.value}}</span>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+
+          <div class="mx-4">
+            <div>{{explanationStep.hint.message}}</div>
+          </div>
+
+        </div>
+      </div>
+
+      <div appAutoFocusOnShow class="card-footer">
+        <button (click)="previousExplanationStep()" [disabled]="previousExplanationStepDisabled" class="btn">
+          ◀ Previous
+        </button>
+        <button (click)="nextExplanationStep()" [disabled]="nextExplanationStepDisabled" class="btn">
+          Next ▶
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="my-3">
+    <div (click)="newExercise()" class="btn btn-secondary">New exercise</div>
+  </div>
+
+</div>

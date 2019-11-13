@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {AdditionExercise, AdditionExplanationStep} from './services/addition-exercise-generator';
+import {AdditionExercise, AdditionExerciseGenerator, AdditionExplanationStep} from './services/addition-exercise-generator';
 import {ExerciseComponent} from '../services/exercise-component';
 
 @Component({
@@ -7,4 +7,7 @@ import {ExerciseComponent} from '../services/exercise-component';
   styleUrls: ['./addition.component.css']
 })
 export class AdditionComponent extends ExerciseComponent<AdditionExercise, AdditionExplanationStep> {
+  constructor() {
+    super(new AdditionExerciseGenerator());
+  }
 }

@@ -1,13 +1,10 @@
 import {AdditionComponent} from './addition.component';
-import {AdditionExerciseGenerator} from './services/addition-exercise-generator';
 
 describe('AdditionComponent', () => {
-  let generator: AdditionExerciseGenerator;
   let target: AdditionComponent;
 
   beforeEach(() => {
-    generator = new AdditionExerciseGenerator();
-    target = new AdditionComponent(generator);
+    target = new AdditionComponent();
   });
 
   // Some tests require at least two or three explanation steps.
