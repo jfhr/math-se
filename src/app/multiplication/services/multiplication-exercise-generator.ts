@@ -61,7 +61,7 @@ export class MultiplicationExerciseGenerator extends Generator<MultiplicationExe
 
     let idx = 1;
     for (const digit of secondFactor) {
-      step.hint = `The ${stringifyNumber(idx)} digit of the second factor is 0.`;
+      step.hint = `The ${stringifyNumber(idx)} digit of the second factor is ${digit}.`;
       if (digit === '0') {
         step.hint += 'Continue to the next digit.';
       } else {
@@ -70,7 +70,9 @@ export class MultiplicationExerciseGenerator extends Generator<MultiplicationExe
           newLine.push({value: ' ', isVisible: false, cssClass: ''});
         }
         // TODO for base !== 2, we may have to do this multiple times.
-        newLine.push(...step.secondFactor);
+        for (const d of step.secondFactor) {
+          newLine.push({value: d.value, cssClass: '', isVisible: true});
+        }
         step.lines.push(newLine);
       }
 
@@ -94,11 +96,6 @@ export class MultiplicationExerciseGenerator extends Generator<MultiplicationExe
     }
     return set;
   }
-}
-
-export interface MultiplicationExerciseWithExplanation {
-  exercise: MultiplicationExercise;
-  explanation: MultiplicationExplanation;
 }
 
 export interface MultiplicationExerciseWithExplanation {
@@ -144,3 +141,4 @@ export interface MultiplicationExplanationStep {
   /** Hint for the user */
   hint: string;
 }
+
