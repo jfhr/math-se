@@ -106,7 +106,7 @@ export class EuclideanAlgorithmExerciseGenerator extends Generator<EuclideanAlgo
   }
 
   getResult(exercise: EuclideanAlgorithmExercise, answer: string): Result {
-    const correct = parseInt(answer) === gcd(exercise.firstNumber, exercise.secondNumber);
+    const correct = parseInt(answer, 10) === gcd(exercise.firstNumber, exercise.secondNumber);
     return {correct};
   }
 }
