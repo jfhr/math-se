@@ -1,6 +1,10 @@
 export function convert(n: number): NumberRepresentationWithFromBase;
 export function convert(n: string): NumberRepresentation;
 
+/**
+ * Convert a number from one base to another.
+ * Call fromBase(), toBase(), or toNumber() on the result to specify the bases.
+ */
 export function convert(n) {
   if (typeof n === 'string') {
     return new NumberRepresentation(n);
@@ -32,6 +36,7 @@ class NumberRepresentationWithFromBase {
   }
 }
 
+/** Sum numbers. Call withBase() to specify the base. */
 export function sum(...values: string[]) {
   return new NumberRepresentationSum(values);
 }
@@ -49,5 +54,26 @@ class NumberRepresentationSum {
       }
     }
     return convert(s).toBase(base);
+  }
+}
+
+/** Multiply numbers. Call withBase() to specify the base. */
+export function multiply(...values: string[]) {
+  return new NumberRepresentationProduct(values);
+}
+
+class NumberRepresentationProduct {
+  constructor(private values: string[]) {
+  }
+
+  public withBase(base: number): string {
+    let p = 1;
+    for (const value of this.values) {
+      const n = convert(value).fromBase(base).toNumber();
+      if (!isNaN(n)) {
+        p *= n;
+      }
+    }
+    return convert(p).toBase(base);
   }
 }

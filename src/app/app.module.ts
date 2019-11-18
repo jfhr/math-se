@@ -5,12 +5,16 @@ import {AppComponent} from './app.component';
 import {ConvertBaseComponent} from './convert-base/convert-base.component';
 import {RouterModule, Routes} from '@angular/router';
 import {NavigatorComponent} from './navigator/navigator.component';
-import {AdditionComponent, AutoFocusOnShowDirective} from './addition/addition.component';
 import {AdditionExerciseGenerator} from './addition/services/addition-exercise-generator';
+import {AdditionComponent} from './addition/addition.component';
+import {EuclideanAlgorithmExerciseGenerator} from './euiclidean-algorithm/services/euclidean-algorithm-exercise-generator';
+import {EuclideanAlgorithmComponent} from './euiclidean-algorithm/euclidean-algorithm.component';
+import {AutoFocusOnShowDirective} from './directives';
 
 const appRoutes: Routes = [
   {path: 'convert-base', component: ConvertBaseComponent},
   {path: 'addition-base', component: AdditionComponent},
+  {path: 'euclidean-algorithm', component: EuclideanAlgorithmComponent},
   {path: '**', component: NavigatorComponent},
 ];
 
@@ -20,6 +24,7 @@ const appRoutes: Routes = [
     NavigatorComponent,
     ConvertBaseComponent,
     AdditionComponent,
+    EuclideanAlgorithmComponent,
     AutoFocusOnShowDirective,
   ],
   imports: [
@@ -29,7 +34,8 @@ const appRoutes: Routes = [
     })
   ],
   providers: [
-    AdditionExerciseGenerator
+    AdditionExerciseGenerator,
+    EuclideanAlgorithmExerciseGenerator,
   ],
   bootstrap: [AppComponent]
 })

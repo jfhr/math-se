@@ -1,4 +1,4 @@
-import {convert} from './base-converter';
+import {convert} from '../../services/base-converter';
 
 export class ConvertBaseExerciseGenerator {
   public cheatCode = 'idk';
