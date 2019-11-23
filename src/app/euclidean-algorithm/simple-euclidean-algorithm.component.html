@@ -1,4 +1,4 @@
-<div (keyup.arrowLeft)="previousExplanationStep()" (keyup.arrowRight)="nextExplanationStep()">
+<div>
 
   <div class="mb-3">
     <h2>Euclidean Algorithm</h2>
@@ -40,23 +40,46 @@
         <div class="row">
 
           <table class="mx-4 align-content-center">
+            <thead>
+            <tr>
+              <th>a</th>
+              <th></th>
+              <th>q</th>
+              <th></th>
+              <th>b</th>
+              <th></th>
+              <th>r</th>
+<!--              <th></th>-->
+<!--              <th>x</th>-->
+<!--              <th>y</th>-->
+            </tr>
+            </thead>
             <tbody>
             <tr class="answer-arg" *ngFor="let row of explanationStep.rows">
-              <td *ngIf="row.dividend.isVisible">
-                <span [classList]="row.dividend.cssClass">{{row.dividend.value}}</span>
+              <td>
+                <app-digit [d]="row.a"></app-digit>
               </td>
               <td><span> = </span></td>
-              <td *ngIf="row.result.isVisible">
-                <span [classList]="row.result.cssClass">{{row.result.value}}</span>
+              <td>
+                <app-digit [d]="row.q"></app-digit>
               </td>
               <td><span> * </span></td>
-              <td *ngIf="row.divisor.isVisible">
-                <span [classList]="row.divisor.cssClass">{{row.divisor.value}}</span>
+              <td>
+                <app-digit [d]="row.b"></app-digit>
               </td>
               <td><span> + </span></td>
-              <td *ngIf="row.rest.isVisible">
-                <span [classList]="row.rest.cssClass">{{row.rest.value}}</span>
+              <td>
+                <app-digit [d]="row.r"></app-digit>
               </td>
+              <!-- x, y values for the extended algorithm -->
+<!--              <td><span> ; </span></td>-->
+<!--              <td>-->
+<!--                <app-digit [d]="row.x"></app-digit>-->
+<!--              </td>-->
+<!--              <td><span> ; </span></td>-->
+<!--              <td>-->
+<!--                <app-digit [d]="row.x"></app-digit>-->
+<!--              </td>-->
             </tr>
             </tbody>
           </table>

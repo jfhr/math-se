@@ -3,3 +3,6 @@ Global styles are defined in the respective bootstrap.css file.
 The file for the user's selected theme is loaded in the method
 loadCss() of the AppModule class.
  */
+.text-bold {
+  font-weight: bold;
+}

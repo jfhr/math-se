@@ -2,6 +2,9 @@
  * Generic code that is shared between exercise components.
  */
 
+import {GlobalKeyboardShortcut} from "./global-keyboard-shortcut";
+import {OnDestroy, OnInit} from "@angular/core";
+
 /**
  * The result of an exercise with a user-submitted answer.
  */
@@ -45,7 +48,7 @@ export abstract class Generator<TExercise, TExplanationStep> {
 /**
  * Abstract superclass for components that represent an exercise type.
  */
-export abstract class ExerciseComponent<TExercise, TExplanationStep> {
+export abstract class ExerciseComponent<TExercise, TExplanationStep> implements OnInit, OnDestroy {
   public showExercise = false;
   public exercise: TExercise;
   public showResult = false;
@@ -58,9 +61,31 @@ export abstract class ExerciseComponent<TExercise, TExplanationStep> {
   private generator: Generator<TExercise, TExplanationStep>;
   private explanationStepIndex = 0;
 
+  private shortcut: GlobalKeyboardShortcut;
+
   constructor(generator: Generator<TExercise, TExplanationStep>) {
     this.generator = generator;
     this.newExercise();
+  }
+
+  ngOnInit(): void {
+    this.shortcut = new GlobalKeyboardShortcut(ev => {
+      switch (ev.code) {
+        case 'ArrowLeft':
+          this.previousExplanationStep();
+          break;
+        case 'ArrowRight':
+          this.nextExplanationStep();
+          break;
+      }
+    });
+    this.shortcut.startListener();
+  }
+
+  ngOnDestroy(): void {
+    if (this.shortcut !== undefined) {
+      this.shortcut.stopListener();
+    }
   }
 
   /**
@@ -71,6 +96,8 @@ export abstract class ExerciseComponent<TExercise, TExplanationStep> {
     const generated = this.generator.generateExercise();
     this.exercise = generated.exercise;
     this.explanation = generated.explanation;
+    this.explanationStep = generated.explanation.steps[0];
+    this.explanationStepIndex = 0;
     this.showExercise = true;
     this.showExplanation = false;
     this.showResult = false;
@@ -98,6 +125,7 @@ export abstract class ExerciseComponent<TExercise, TExplanationStep> {
     if (this.showExercise && this.exercise !== undefined) {
       this.result = this.generator.getResult(this.exercise, answerField.value);
 
+      this.explanationStepIndex = 0;
       this.explanationStep = this.explanation.steps[0];
       this.previousExplanationStepDisabled = true;
       this.nextExplanationStepDisabled = false;
@@ -147,3 +175,12 @@ export interface Digit {
   /** If set, indicates the css-class of the digit for highlighting */
   cssClass: string;
 }
+
+/**
+ * An empty, not visible digit.
+ */
+export const emptyDigit: Digit = {
+  value: '',
+  isVisible: false,
+  cssClass: '',
+};

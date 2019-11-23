@@ -7,24 +7,26 @@ import {RouterModule, Routes} from '@angular/router';
 import {NavigatorComponent} from './navigator/navigator.component';
 import {AdditionExerciseGenerator} from './addition/services/addition-exercise-generator';
 import {AdditionComponent} from './addition/addition.component';
-import {EuclideanAlgorithmExerciseGenerator} from './euiclidean-algorithm/services/euclidean-algorithm-exercise-generator';
-import {EuclideanAlgorithmComponent} from './euiclidean-algorithm/euclidean-algorithm.component';
 import {AutoFocusOnShowDirective} from './directives';
+import {SimpleEuclideanAlgorithmComponent} from './euclidean-algorithm/simple-euclidean-algorithm.component';
+import {DigitComponent} from './app-digit/digit.component';
+import {SimpleEuclideanGenerator} from "./euclidean-algorithm/services/simple-euclidean-generator";
 
 const appRoutes: Routes = [
   {path: 'convert-base', component: ConvertBaseComponent},
   {path: 'addition-base', component: AdditionComponent},
-  {path: 'euclidean-algorithm', component: EuclideanAlgorithmComponent},
+  {path: 'euclidean-algorithm', component: SimpleEuclideanAlgorithmComponent},
   {path: '**', component: NavigatorComponent},
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
+    DigitComponent,
     NavigatorComponent,
     ConvertBaseComponent,
     AdditionComponent,
-    EuclideanAlgorithmComponent,
+    SimpleEuclideanAlgorithmComponent,
     AutoFocusOnShowDirective,
   ],
   imports: [
@@ -35,7 +37,7 @@ const appRoutes: Routes = [
   ],
   providers: [
     AdditionExerciseGenerator,
-    EuclideanAlgorithmExerciseGenerator,
+    SimpleEuclideanGenerator,
   ],
   bootstrap: [AppComponent]
 })

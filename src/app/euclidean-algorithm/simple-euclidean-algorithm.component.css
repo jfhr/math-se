@@ -6,6 +6,10 @@ tr.answer-result {
   border-top: 2px solid;
 }
 
+td {
+  padding: 4px;
+}
+
 .d-current-row {
   color: yellow;
 }
