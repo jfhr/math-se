@@ -4,7 +4,7 @@ import {
   EuclideanExercise,
   EuclideanExplanationStep
 } from './services/euclidean-algorithm-exercise-generator';
-import {SimpleEuclideanGenerator} from "./services/simple-euclidean-generator";
+import {SimpleEuclideanGenerator} from './services/simple-euclidean-generator';
 
 @Component({
   templateUrl: './simple-euclidean-algorithm.component.html',

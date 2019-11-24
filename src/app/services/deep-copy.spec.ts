@@ -1,6 +1,6 @@
 import {deepCopy} from './deep-copy';
 
-describe('deep-copy', () => {
+describe('Deep copy', () => {
 
   const object = {
     id: 23,

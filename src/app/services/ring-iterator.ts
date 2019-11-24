@@ -16,8 +16,8 @@ export class RingIterator<T> implements Iterator<T[]> {
   }
 
   public next(): IteratorResult<T[]> {
-    this.index = (this.index + 1) % this.items.length;
     const value = this.items.slice(this.index).concat(this.items.slice(0, this.index));
+    this.index = (this.index + 1) % this.items.length;
     return {
       value, done: false,  // we're never done
     };

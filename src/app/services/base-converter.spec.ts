@@ -1,6 +1,6 @@
 import {convert} from './base-converter';
 
-describe('base-converter', () => {
+describe('Base converter', () => {
 
   it('should convert from decimal to binary', () => {
     const input = '255';

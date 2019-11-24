@@ -3,19 +3,41 @@
   <div class="mb-3">
     <h2>Euclidean Algorithm</h2>
     <div>Find the greatest common divisor of the two numbers by hand using the euclidean algorithm.</div>
+    <div>Then find an integer solution to the equation below.</div>
   </div>
 
   <div *ngIf="showExercise" class="input-group my-3">
     <div class="col-form-label">
-      <form (submit)="submitAnswer(answer)" class="text-math" autocomplete="off">
+      <form (submit)="submitAnswer()" class="text-math" autocomplete="off">
         <span class="mx-1">gcd(</span>
         <b class="mx-1">{{ exercise.firstNumber }}</b>
         <span class="mx-1">,</span>
         <b class="mx-1">{{ exercise.secondNumber }}</b>
         <span class="mx-1">) =</span>
         <label>
-          <input #answer autofocus class="input-group-text mx-1" type="text">
+          <input [(ngModel)]="answerGcd" autofocus class="input-group-text mx-1" type="text" name="answerGcd">
         </label>
+        <br>
+
+        <span class="mx-1">{{ exercise.firstNumber }}</span>
+        <span class="mx-1">*</span>
+        <label>
+          <input [(ngModel)]="answerX" class="input-group-text mx-1" type="text" name="answerX">
+        </label>
+        <span class="mx-1">+</span>
+        <span class="mx-1">{{ exercise.secondNumber }}</span>
+        <span class="mx-1">*</span>
+        <label>
+          <input [(ngModel)]="answerY" class="input-group-text mx-1" type="text" name="answerY">
+        </label>
+        <span class="mx-1">=</span>
+        <span class="mx-1">gcd(</span>
+        <b class="mx-1">{{ exercise.firstNumber }}</b>
+        <span class="mx-1">,</span>
+        <b class="mx-1">{{ exercise.secondNumber }}</b>
+        <span class="mx-1">)</span>
+
+        <input type="submit" style="visibility: hidden;"/>
       </form>
     </div>
   </div>
@@ -49,12 +71,39 @@
               <th>b</th>
               <th></th>
               <th>r</th>
-<!--              <th></th>-->
-<!--              <th>x</th>-->
-<!--              <th>y</th>-->
+              <th></th>
+              <th>x</th>
+              <th></th>
+              <th>y</th>
             </tr>
             </thead>
             <tbody>
+            <tr class="answer-arg">
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>1</td>
+              <td></td>
+              <td>0</td>
+            </tr>
+            <tr class="answer-arg">
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>0</td>
+              <td></td>
+              <td>1</td>
+            </tr>
             <tr class="answer-arg" *ngFor="let row of explanationStep.rows">
               <td>
                 <app-digit [d]="row.a"></app-digit>
@@ -71,15 +120,14 @@
               <td>
                 <app-digit [d]="row.r"></app-digit>
               </td>
-              <!-- x, y values for the extended algorithm -->
-<!--              <td><span> ; </span></td>-->
-<!--              <td>-->
-<!--                <app-digit [d]="row.x"></app-digit>-->
-<!--              </td>-->
-<!--              <td><span> ; </span></td>-->
-<!--              <td>-->
-<!--                <app-digit [d]="row.x"></app-digit>-->
-<!--              </td>-->
+              <td><span> ; </span></td>
+              <td>
+                <app-digit [d]="row.x"></app-digit>
+              </td>
+              <td><span> ; </span></td>
+              <td>
+                <app-digit [d]="row.y"></app-digit>
+              </td>
             </tr>
             </tbody>
           </table>

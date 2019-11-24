@@ -25,7 +25,7 @@ export abstract class EuclideanAlgorithmExerciseGenerator extends Generator<Eucl
     return {explanation, exercise};
   }
 
-  public getCalculationSteps(firstNumber: number, secondNumber: number, type: 'simple' | 'complex'): InternalCalculationStep[] {
+  public getCalculationSteps(firstNumber: number, secondNumber: number, type: 'simple' | 'extended'): InternalCalculationStep[] {
     const steps: InternalCalculationStep[] = [];
     let a = firstNumber;
     let b = secondNumber;
@@ -35,7 +35,7 @@ export abstract class EuclideanAlgorithmExerciseGenerator extends Generator<Eucl
     let y;
 
     // create initial values for x and y
-    if (type === 'complex') {
+    if (type === 'extended') {
       steps.push({x: 1, y: 0});
       steps.push({x: 0, y: 1});
     }
@@ -46,7 +46,7 @@ export abstract class EuclideanAlgorithmExerciseGenerator extends Generator<Eucl
       q = Math.floor(a / b);
       r = a % b;
       // if r === 0, no new x, y values are calculated
-      if (type === 'complex' && r !== 0) {
+      if (type === 'extended' && r !== 0) {
         x = getFromEnd(steps, 1).x - q * getFromEnd(steps).x;
         y = getFromEnd(steps, 1).y - q * getFromEnd(steps).y;
       } else {
@@ -61,6 +61,11 @@ export abstract class EuclideanAlgorithmExerciseGenerator extends Generator<Eucl
       b = r;
     } while (r !== 0);
 
+    // remove the initial x, y steps since they are not displayed separately
+    if (type === 'extended') {
+      steps.splice(0, 2);
+    }
+
     return steps;
   }
 
@@ -72,7 +77,7 @@ export abstract class EuclideanAlgorithmExerciseGenerator extends Generator<Eucl
     }
   }
 
-  public abstract generateExplanationForExercise(exercise: EuclideanExercise);
+  public abstract generateExplanationForExercise(exercise: EuclideanExercise): EuclideanExplanation;
 }
 
 /**

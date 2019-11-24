@@ -2,8 +2,8 @@
  * Generic code that is shared between exercise components.
  */
 
-import {GlobalKeyboardShortcut} from "./global-keyboard-shortcut";
-import {OnDestroy, OnInit} from "@angular/core";
+import {GlobalKeyboardShortcut} from './global-keyboard-shortcut';
+import {OnDestroy, OnInit} from '@angular/core';
 
 /**
  * The result of an exercise with a user-submitted answer.
@@ -23,7 +23,7 @@ export interface Explanation<TExplanationStep> {
 export abstract class Generator<TExercise, TExplanationStep> {
   abstract generateExercise(): { exercise: TExercise, explanation: Explanation<TExplanationStep> };
 
-  abstract getResult(exercise: TExercise, answer: string): Result;
+  abstract getResult(exercise: TExercise, answer: string | Answer): Result;
 
   protected toDigitArray(length: number, value: string, cssClass: string = '', isVisible: boolean = false): Digit[] {
     const digits: Digit[] = [];
@@ -46,6 +46,13 @@ export abstract class Generator<TExercise, TExplanationStep> {
 }
 
 /**
+ * This interface exists to be extended by interfaces
+ * representing structured user answers.
+ */
+export interface Answer {
+}
+
+/**
  * Abstract superclass for components that represent an exercise type.
  */
 export abstract class ExerciseComponent<TExercise, TExplanationStep> implements OnInit, OnDestroy {
@@ -58,10 +65,10 @@ export abstract class ExerciseComponent<TExercise, TExplanationStep> implements 
   public explanationStep: TExplanationStep;
   public previousExplanationStepDisabled = true;
   public nextExplanationStepDisabled = true;
-  private generator: Generator<TExercise, TExplanationStep>;
-  private explanationStepIndex = 0;
+  protected generator: Generator<TExercise, TExplanationStep>;
+  protected explanationStepIndex = 0;
 
-  private shortcut: GlobalKeyboardShortcut;
+  protected shortcut: GlobalKeyboardShortcut;
 
   constructor(generator: Generator<TExercise, TExplanationStep>) {
     this.generator = generator;
@@ -96,8 +103,7 @@ export abstract class ExerciseComponent<TExercise, TExplanationStep> implements 
     const generated = this.generator.generateExercise();
     this.exercise = generated.exercise;
     this.explanation = generated.explanation;
-    this.explanationStep = generated.explanation.steps[0];
-    this.explanationStepIndex = 0;
+    this.resetExplanationStep();
     this.showExercise = true;
     this.showExplanation = false;
     this.showResult = false;
@@ -125,14 +131,18 @@ export abstract class ExerciseComponent<TExercise, TExplanationStep> implements 
     if (this.showExercise && this.exercise !== undefined) {
       this.result = this.generator.getResult(this.exercise, answerField.value);
 
-      this.explanationStepIndex = 0;
-      this.explanationStep = this.explanation.steps[0];
-      this.previousExplanationStepDisabled = true;
-      this.nextExplanationStepDisabled = false;
+      this.resetExplanationStep();
       this.showResult = true;
       this.showExplanation = true;
     }
     return false;
+  }
+
+  protected resetExplanationStep() {
+    this.explanationStepIndex = 0;
+    this.explanationStep = this.explanation.steps[0];
+    this.previousExplanationStepDisabled = true;
+    this.nextExplanationStepDisabled = false;
   }
 
   public previousExplanationStep() {

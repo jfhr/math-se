@@ -1,6 +1,6 @@
 import {gcd} from './gcd';
 
-describe('gcd', () => {
+describe('Greatest common divisor', () => {
 
   it('should return gcd(2154, 458) === 2', () => {
     expect(gcd(2154, 458)).toEqual(2);

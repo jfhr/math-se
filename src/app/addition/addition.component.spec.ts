@@ -1,6 +1,6 @@
 import {AdditionComponent} from './addition.component';
 
-describe('AdditionComponent', () => {
+describe('Addition component', () => {
   let target: AdditionComponent;
 
   beforeEach(() => {

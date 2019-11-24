@@ -1,6 +1,6 @@
 import {MsToWidthConverter} from './ms-to-width-converter';
 
-describe('millisecond-to-width-converter', () => {
+describe('Millisecond to width converter', () => {
 
   it('should change the scale factor to approach the target width', () => {
     const targetValue = 50;

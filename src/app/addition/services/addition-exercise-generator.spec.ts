@@ -1,7 +1,7 @@
 import {AdditionExerciseGenerator} from './addition-exercise-generator';
 import {convert, sum} from '../../services/base-converter';
 
-describe('addition-exercise-generator', () => {
+describe('Addition Exercise Generator', () => {
 
   it('should generate a valid exercise', () => {
     const target = new AdditionExerciseGenerator();

@@ -1,6 +1,6 @@
 import {stringifyNumber} from './stringify-number';
 
-describe('stringify-number', () => {
+describe('Stringify number', () => {
 
   it('should stringify numbers correctly', () => {
     expect(stringifyNumber(0)).toEqual('0th');

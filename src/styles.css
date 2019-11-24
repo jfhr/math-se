@@ -6,3 +6,7 @@ loadCss() of the AppModule class.
 .text-bold {
   font-weight: bold;
 }
+
+.text-math {
+  font-family: 'Cambria Math', serif;
+}

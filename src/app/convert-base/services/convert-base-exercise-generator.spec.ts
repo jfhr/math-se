@@ -1,6 +1,6 @@
 import {ConvertBaseExerciseGenerator} from './convert-base-exercise-generator';
 
-describe('convert-base-exercise-generator', () => {
+describe('Convert base exercise generator', () => {
 
   it('should create a correct exercise', () => {
     const target = new ConvertBaseExerciseGenerator({

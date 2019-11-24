@@ -7,7 +7,7 @@
 
   <div *ngIf="showExercise" class="input-group my-3">
     <div class="col-form-label">
-      <form (submit)="submitAnswer(answer)">
+      <form (submit)="submitAnswer(answer)" class="text-math" autocomplete="off">
         (<b class="mx-1">{{ formatNumber(exercise.firstSummand) }}</b>)
         <sub class="mx-1">{{ exercise.base }}</sub>
         <span class="mx-1">+</span>
