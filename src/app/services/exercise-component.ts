@@ -49,6 +49,7 @@ export abstract class Generator<TExercise, TExplanationStep> {
  * This interface exists to be extended by interfaces
  * representing structured user answers.
  */
+// tslint:disable-next-line:no-empty-interface
 export interface Answer {
 }
 
