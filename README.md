@@ -1,6 +1,7 @@
 # MathTraining
 
 [![Build Status](https://dev.azure.com/ogoo/math-training/_apis/build/status/math-training?branchName=master)](https://dev.azure.com/ogoo/math-training/_build/latest?definitionId=1&branchName=master)
+![CI](https://github.com/jfhr/math-se/workflows/CI/badge.svg)
 
 This project contains tools that help teach math concepts relevant for software engineers, like binary numbers and logic gates. The application is in active development and contributions are welcome.
 
