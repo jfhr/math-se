@@ -11,15 +11,15 @@ import {ExtendedEuclideanGenerator} from './services/extended-euclidean-generato
   styleUrls: ['./extended-euclidean-algorithm.component.css']
 })
 export class ExtendedEuclideanAlgorithmComponent extends ExerciseComponent<EuclideanExercise, EuclideanExplanationStep> {
-  private answerGcd: string;
-  private answerX: string;
-  private answerY: string;
+  public answerGcd: string;
+  public answerX: string;
+  public answerY: string;
 
   constructor(generator: ExtendedEuclideanGenerator) {
     super(generator);
   }
 
-  public submitAnswer(answerField): boolean {
+  public submitAnswer(): boolean {
     if (this.showExercise && this.exercise !== undefined) {
       const answer = {
         gcd: this.answerGcd, x: this.answerX, y: this.answerY
