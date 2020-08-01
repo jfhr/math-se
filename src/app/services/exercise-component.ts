@@ -3,7 +3,7 @@
  */
 
 import {GlobalKeyboardShortcut} from './global-keyboard-shortcut';
-import {OnDestroy, OnInit} from '@angular/core';
+import { OnDestroy, OnInit, Directive } from '@angular/core';
 
 /**
  * The result of an exercise with a user-submitted answer.
@@ -56,6 +56,7 @@ export interface Answer {
 /**
  * Abstract superclass for components that represent an exercise type.
  */
+@Directive()
 export abstract class ExerciseComponent<TExercise, TExplanationStep> implements OnInit, OnDestroy {
   public showExercise = false;
   public exercise: TExercise;
