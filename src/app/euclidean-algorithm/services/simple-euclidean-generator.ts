@@ -9,11 +9,13 @@ import {
   EuclideanExplanationStep
 } from './euclidean-algorithm-exercise-generator';
 import {emptyDigit} from '../../services/exercise-component';
+import { Injectable } from "@angular/core";
 
 /**
  * Generator for simple euclidean algorithm exercises,
  * where the goal is to find the gcd of two numbers.
  */
+@Injectable()
 export class SimpleEuclideanGenerator extends EuclideanAlgorithmExerciseGenerator {
   public getResult(exercise, answer) {
     const correct = parseInt(answer, 10) === gcd(exercise.firstNumber, exercise.secondNumber);

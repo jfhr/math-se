@@ -2,7 +2,9 @@ import {convert, sum} from '../../services/base-converter';
 import {randomInt} from '../../services/random-int';
 import {deepCopy} from '../../services/deep-copy';
 import {Digit, Generator, Result} from '../../services/exercise-component';
+import { Injectable } from "@angular/core";
 
+@Injectable()
 export class AdditionExerciseGenerator extends Generator<AdditionExercise, AdditionExplanationStep> {
   public generateExercise(): AdditionExerciseWithExplanation {
     const base = 2;  // TODO inject allowed bases

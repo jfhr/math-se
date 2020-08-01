@@ -9,6 +9,7 @@ import {RingIterator} from '../../services/ring-iterator';
 import {deepCopy} from '../../services/deep-copy';
 import {getFromEnd} from '../../services/array-get-from-end';
 import {gcd} from '../../services/gcd';
+import { Injectable } from "@angular/core";
 
 interface ExtendedEuclideanAnswer extends Answer {
   gcd: string;
@@ -16,6 +17,7 @@ interface ExtendedEuclideanAnswer extends Answer {
   y: string;
 }
 
+@Injectable()
 export class ExtendedEuclideanGenerator extends EuclideanAlgorithmExerciseGenerator {
   generateExplanationForExercise(exercise: EuclideanExercise) {
     const {firstNumber, secondNumber} = exercise;
