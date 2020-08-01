@@ -1,14 +1,14 @@
-import {gcd} from "../../services/gcd";
-import {RingIterator} from "../../services/ring-iterator";
-import {deepCopy} from "../../services/deep-copy";
-import {getFromEnd} from "../../services/array-get-from-end";
+import {gcd} from '../../services/gcd';
+import {RingIterator} from '../../services/ring-iterator';
+import {deepCopy} from '../../services/deep-copy';
+import {getFromEnd} from '../../services/array-get-from-end';
 import {
   EuclideanAlgorithmExerciseGenerator,
   EuclideanExercise,
   EuclideanExplanation,
   EuclideanExplanationStep
-} from "./euclidean-algorithm-exercise-generator";
-import {emptyDigit} from "../../services/exercise-component";
+} from './euclidean-algorithm-exercise-generator';
+import {emptyDigit} from '../../services/exercise-component';
 
 /**
  * Generator for simple euclidean algorithm exercises,
