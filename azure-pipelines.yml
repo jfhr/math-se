@@ -23,20 +23,14 @@ steps:
   inputs:
     script: |
       npm install -g @angular/cli
-      ng lint
-    # ng test --watch=false
-    # ng e2e --watch=false
-  displayName: 'Run lint & tests'
-- task: CmdLine@2
-  inputs:
-    script: 'ng build --prod'
-  displayName: 'Build for production'
-- task: CopyFilesOverSSH@0
+      ng build --prod
+  displayName: 'Build'
+- task: CopyFilesOverSSH@3
   inputs:
     sshEndpoint: 'powersrvr connection'
     sourceFolder: 'dist/math-training'
     contents: '**'
-    targetFolder: '/var/www/f60ceb3d-8928-442b-9093-e8eaababc28e'
+    targetFolder: '/var/www/math-se'
     cleanTargetFolder: true
     failOnEmptySource: true
-  displayName: 'Copy to server'
+  displayName: 'Deploy'
