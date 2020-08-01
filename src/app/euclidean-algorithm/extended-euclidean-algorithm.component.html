@@ -8,7 +8,7 @@
 
   <div *ngIf="showExercise" class="input-group my-3">
     <div class="col-form-label">
-      <form (submit)="submitAnswer(undefined)" class="text-math" autocomplete="off">
+      <form (submit)="submitAnswer()" class="text-math" autocomplete="off">
         <span class="mx-1">gcd(</span>
         <b class="mx-1">{{ exercise.firstNumber }}</b>
         <span class="mx-1">,</span>
