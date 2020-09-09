@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
-    "test": "ng test",
+    "start": "start /b dotnet run --project backend/MathSe/MathSe.csproj && ng serve",
+    "build": "dotnet build --project backend/MathSe/MathSe.csproj && ng build",
+    "test": "dotnet test ./backend/MathSe.Test/MathSe.Test.csproj && ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },

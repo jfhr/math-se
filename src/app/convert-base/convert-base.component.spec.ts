@@ -1,25 +1,25 @@
-import {async, TestBed} from '@angular/core/testing';
-import {RouterTestingModule} from '@angular/router/testing';
-import {ConvertBaseComponent} from './convert-base.component';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-describe('Convert base component', () => {
+import { ConvertBaseComponent } from './convert-base.component';
+
+describe('ConvertBaseComponent', () => {
+  let component: ConvertBaseComponent;
+  let fixture: ComponentFixture<ConvertBaseComponent>;
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [
-        ConvertBaseComponent
-      ],
-      imports: [RouterTestingModule]
-    }).compileComponents();
+      declarations: [ ConvertBaseComponent ]
+    })
+    .compileComponents();
   }));
 
-  it('should create the app', () => {
-    const fixture = TestBed.createComponent(ConvertBaseComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app).toBeTruthy();
+  beforeEach(() => {
+    fixture = TestBed.createComponent(ConvertBaseComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
   });
 
-  it('should auto-create an exercise on load', () => {
-    const fixture = TestBed.createComponent(ConvertBaseComponent);
-    expect(fixture.nativeElement.querySelectorAll('.exercise').length).toEqual(1);
+  it('should create', () => {
+    expect(component).toBeTruthy();
   });
 });

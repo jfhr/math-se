@@ -1,5 +1,6 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
+import {HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 import {RouterModule, Routes} from '@angular/router';
 
@@ -14,6 +15,9 @@ import {DigitComponent} from './app-digit/digit.component';
 import {SimpleEuclideanGenerator} from './euclidean-algorithm/services/simple-euclidean-generator';
 import {ExtendedEuclideanAlgorithmComponent} from './euclidean-algorithm/extended-euclidean-algorithm.component';
 import {ExtendedEuclideanGenerator} from './euclidean-algorithm/services/extended-euclidean-generator';
+import {FeedbackComponent} from './feedback/feedback.component';
+import {FeedbackService} from './services/feedback-service';
+import {NgbModalRef, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 const appRoutes: Routes = [
   {path: 'convert-base', component: ConvertBaseComponent},
@@ -32,6 +36,7 @@ const appRoutes: Routes = [
     AdditionComponent,
     SimpleEuclideanAlgorithmComponent,
     ExtendedEuclideanAlgorithmComponent,
+    FeedbackComponent,
     AutoFocusOnShowDirective,
   ],
   imports: [
@@ -39,14 +44,20 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes, {
       paramsInheritanceStrategy: 'always',
     }),
-    FormsModule
+    FormsModule,
+    NgbModule,
+    HttpClientModule,
   ],
   providers: [
     AdditionExerciseGenerator,
     SimpleEuclideanGenerator,
     ExtendedEuclideanGenerator,
+    FeedbackService,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    FeedbackComponent,
+  ]
 })
 export class AppModule {
 }

@@ -1,46 +1,47 @@
+import {Answer, Explanation, Generator, Result} from '../../services/exercise-component';
+import {randomInt} from '../../services/random-int';
 import {convert} from '../../services/base-converter';
 
-export class ConvertBaseExerciseGenerator {
-  public cheatCode = 'idk';
+export class ConvertBaseExerciseGenerator extends Generator<Exercise, ExplanationStep> {
 
-  constructor(private options: ConvertBaseExerciseGeneratorOptions) {
+  constructor(private bases: number[], private maxValue: number) {
+    super();
   }
 
-  public getExercise(): Exercise {
-    const sourceBase = this.getRandomBase();
-    const expectedBase = this.getRandomBase(sourceBase);
-    const n = Math.floor(Math.random() * this.options.maxValue);
-    const source = convert(n).toBase(sourceBase);
-    return {source, sourceBase, expectedBase, value: n};
-  }
+  generateExercise(): { exercise: Exercise; explanation: Explanation<ExplanationStep> } {
+    const num = randomInt(0, this.maxValue);
+    const exValues = [];
+    // The 1 base for which the value is given. The user must fill in all other bases.
+    const hintBase = this.bases[randomInt(0, this.bases.length)];
 
-  public checkResult(exercise: Exercise, answer: string): boolean {
-    if (answer === this.cheatCode) {
-      return true;
+    for (const base of this.bases) {
+      if (base === hintBase) {
+        exValues.push({base, value: convert(num).toBase(base)});
+      } else {
+        exValues.push({base});
+      }
     }
-    const n = convert(answer).fromBase(exercise.expectedBase).toNumber();
-    return n === exercise.value;
+
+    const exercise = new Exercise();
+    exercise.values = exValues;
+
+    return {exercise, explanation: {steps: []}};
   }
 
-  private getRandomBase(exclude?: number): number {
-    const index = Math.floor(Math.random() * this.options.bases.length);
-    const base = this.options.bases[index];
-    if (exclude === base) {
-      return this.getRandomBase(exclude);
-    } else {
-      return base;
-    }
+  getResult(exercise: Exercise, answer: string | Answer): Result {
+    return undefined;
   }
 }
 
-export interface ConvertBaseExerciseGeneratorOptions {
-  bases: number[];
-  maxValue: number;
+export class Exercise {
+  /**
+   * Contains the available bases with values.
+   * If value is undefined, that base should be filled in by the user.
+   */
+  values: { base: number, value?: string }[];
 }
 
-export interface Exercise {
-  source: string;
-  sourceBase: number;
-  expectedBase: number;
-  value: number;
+export class ExplanationStep {
+  // nothing in here, since there is no explanation
+  // for this type of exercise.
 }

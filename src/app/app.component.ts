@@ -1,4 +1,6 @@
 import {Component} from '@angular/core';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {FeedbackComponent} from './feedback/feedback.component';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +11,7 @@ export class AppComponent {
   public switchThemeMessage;
   private params: URLSearchParams;
 
-  constructor() {
+  constructor(private modalService: NgbModal) {
     // we read the user's theme preference from the url query params
     // use location.hash instead of location.search to avoid reload on set
     this.params = new URLSearchParams(location.search);
@@ -39,5 +41,11 @@ export class AppComponent {
     } else {
       this.switchThemeMessage = 'lights off';
     }
+  }
+
+  public openFeedbackModal() {
+    const modalRef = this.modalService.open(FeedbackComponent);
+    modalRef.componentInstance.feedbackSubmitted
+      .subscribe(_ => this.modalService.dismissAll('Finished.'));
   }
 }

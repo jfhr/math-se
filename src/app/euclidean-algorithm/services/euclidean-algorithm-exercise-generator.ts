@@ -2,6 +2,8 @@ import {Digit, Generator} from '../../services/exercise-component';
 import {getFromEnd} from '../../services/array-get-from-end';
 import {randomInt} from '../../services/random-int';
 
+import {gcd} from '../../services/gcd';
+
 /**
  * Generator for euclidean algorithm exercises. In this type of exercise,
  * the user must find the greatest common divisor (gcd) of two numbers by hand
@@ -10,9 +12,11 @@ import {randomInt} from '../../services/random-int';
 export abstract class EuclideanAlgorithmExerciseGenerator extends Generator<EuclideanExercise, EuclideanExplanationStep> {
 
   public generateExercise() {
-    const firstNumber = randomInt(256, 4096);
-    const secondNumber = randomInt(256, 4096);
+    const firstNumber = randomInt(12, 256);
+    const secondNumber = randomInt(12, 256);
+    console.log(firstNumber, secondNumber, gcd(firstNumber, secondNumber));
     // don't proceed if they happen to be the same number
+    // @ts-ignore
     if (firstNumber === secondNumber) {
       return this.generateExercise();
     }

@@ -1,0 +1,43 @@
+<div class="modal-content p-3">
+
+  <div class="modal-header">
+    <h4>Send feedback</h4>
+  </div>
+
+  <div class="btn-group mb-3 float-left">
+    <a
+      class="btn float-left active"
+      *ngFor="let type of allTypes"
+      (click)="selectedType = type"
+      [class.btn-primary]="type == selectedType"
+    >
+      <span class="text-large">{{type.shortName}}</span>
+    </a>
+  </div>
+  <br>
+
+  <label>
+    <input
+      class="form-control"
+      type="text"
+      [(ngModel)]="title"
+      placeholder="Title"
+    >
+  </label>
+  <br>
+  <label>
+    <textarea
+      class="form-control"
+      style="height: 8em;"
+      [(ngModel)]="description"
+      placeholder="Describe your issue here..."
+    >
+    </textarea>
+  </label>
+  <br>
+
+  <button class="btn btn-primary" (click)="submitFeedback()">
+    Send
+  </button>
+
+</div>
