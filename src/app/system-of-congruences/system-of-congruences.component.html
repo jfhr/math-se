@@ -1,0 +1,36 @@
+<div>
+
+  <div class="mb-3">
+    <h2>System of congruences</h2>
+    <div>
+      Find all values for x that satisfy all of the given congruences.
+      Enter x in the form <code>x<sub>0</sub> mod m</code>
+    </div>
+  </div>
+
+  <div *ngIf="showExercise" class="input-group my-3">
+    <div class="col-form-label">
+      <form (submit)="submitAnswer(answer)" class="text-math" autocomplete="off">
+        <ng-container *ngFor="let congruency of exercise.congruences">
+          <span class="mx-1">x =</span>
+          <b class="mx-1">{{congruency.x}}</b>
+          <span class="mx-1"> mod </span>
+          <b class="mx-1">{{congruency.m}}</b>
+        </ng-container>
+        <label>
+          <input #answer autofocus class="input-group-text mx-1" type="text">
+        </label>
+      </form>
+    </div>
+  </div>
+
+  <div *ngIf="showResult" class="my-3">
+    <div *ngIf="result.correct" class="alert alert-success">
+      Correct!
+    </div>
+    <div *ngIf="!result.correct" class="alert alert-danger">
+      Wrong. See the explanation below.
+    </div>
+  </div>
+
+</div>
