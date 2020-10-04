@@ -15,12 +15,14 @@ import {SimpleEuclideanGenerator} from './euclidean-algorithm/services/simple-eu
 import {ExtendedEuclideanAlgorithmComponent} from './euclidean-algorithm/extended-euclidean-algorithm.component';
 import {ExtendedEuclideanGenerator} from './euclidean-algorithm/services/extended-euclidean-generator';
 import {SystemOfCongruencesComponent} from './system-of-congruences/system-of-congruences.component';
+import {SystemOfCongruencesGenerator} from './system-of-congruences/services/system-of-congruences-generator';
 
 const appRoutes: Routes = [
   {path: 'convert-base', component: ConvertBaseComponent},
   {path: 'addition-base', component: AdditionComponent},
   {path: 'euclidean-algorithm', component: SimpleEuclideanAlgorithmComponent},
   {path: 'extended-euclidean-algorithm', component: ExtendedEuclideanAlgorithmComponent},
+  {path: 'system-of-congruences', component: SystemOfCongruencesComponent},
   {path: '**', component: NavigatorComponent},
 ];
 
@@ -47,6 +49,7 @@ const appRoutes: Routes = [
     AdditionExerciseGenerator,
     SimpleEuclideanGenerator,
     ExtendedEuclideanGenerator,
+    SystemOfCongruencesGenerator,
   ],
   bootstrap: [AppComponent]
 })

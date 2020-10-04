@@ -3,7 +3,7 @@ import {randomInt} from '../../services/random-int';
 import {gcd} from '../../services/gcd';
 import {mulInverse} from '../../services/mul-inverse';
 
-export class SystemOfCongruencesExerciseGenerator extends Generator<SystemOfCongruencesExercise, SystemOfCongruencesExplanationStep> {
+export class SystemOfCongruencesGenerator extends Generator<SystemOfCongruencesExercise, SystemOfCongruencesExplanationStep> {
 
   public generateExercise(): { exercise: SystemOfCongruencesExercise, explanation: SystemOfCongruencesExplanation } {
     const congruences: Congruence[] = [];
@@ -17,12 +17,14 @@ export class SystemOfCongruencesExerciseGenerator extends Generator<SystemOfCong
     const s = congruences.map((c, i) => c.x * M[i] * N[i]).reduce((p, c) => p + c, 0);
     const x = s % m;
 
+    const und = {m: undefined, M: undefined, N: undefined, s: undefined, x: undefined};
+
     const explanationSteps: SystemOfCongruencesExplanationStep[] = [
-      {m, M, N, s, x, step: 0, hint: {message: 'Check to make sure all modulo values are pairwise prime'}},
-      {m, M, N, s, x, step: 1, hint: {message: 'The value of m is the product of all modulo values'}},
-      {m, M, N, s, x, step: 2, hint: {message: 'For each term, the value of M is m divided by that terms modulo value'}},
-      {m, M, N, s, x, step: 3, hint: {message: 'For each term, N is the multiplicative inverse of M modulo that terms modulo value'}},
-      {m, M, N, s, x, step: 4, hint: {message: 'For each term, multiply x, M and N, and add those values together to get s'}},
+      {...und, step: 0, hint: {message: 'Check to make sure all modulo values are pairwise prime'}},
+      {...und, m, step: 1, hint: {message: 'The value of m is the product of all modulo values'}},
+      {...und, m, M, step: 2, hint: {message: 'For each term, the value of M is m divided by that terms modulo value'}},
+      {...und, m, M, N, step: 3, hint: {message: 'For each term, N is the multiplicative inverse of M modulo that terms modulo value'}},
+      {...und, m, M, N, s, step: 4, hint: {message: 'For each term, multiply x, M and N, and add those values together to get s'}},
       {m, M, N, s, x, step: 5, hint: {message: 'The possible values of x are given by s modulo m'}},
     ];
 
@@ -36,7 +38,7 @@ export class SystemOfCongruencesExerciseGenerator extends Generator<SystemOfCong
     let m;
     do {
       m = randomInt(2, 13);
-    } while (this.arePairwisePrime(m, ...congruences.map(c => c.m)));
+    } while (!this.arePairwisePrime(m, ...congruences.map(c => c.m)));
 
     const x = randomInt(0, m);
     congruences.push({x, m});

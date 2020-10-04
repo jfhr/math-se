@@ -1,11 +1,11 @@
-import {SystemOfCongruencesExerciseGenerator} from './system-of-congruences-exercise-generator';
+import {SystemOfCongruencesGenerator} from './system-of-congruences-generator';
 
 describe('System of congruences generator', () => {
 
-  let target: SystemOfCongruencesExerciseGenerator;
+  let target: SystemOfCongruencesGenerator;
 
   beforeEach(() => {
-    target = new SystemOfCongruencesExerciseGenerator();
+    target = new SystemOfCongruencesGenerator();
   });
 
   it('should return a correct result', () => {

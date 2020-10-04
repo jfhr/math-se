@@ -4,22 +4,28 @@
     <h2>System of congruences</h2>
     <div>
       Find all values for x that satisfy all of the given congruences.
-      Enter x in the form <code>x<sub>0</sub> mod m</code>
+      Enter x in the form x<sub>0</sub> mod m
     </div>
   </div>
 
   <div *ngIf="showExercise" class="input-group my-3">
     <div class="col-form-label">
-      <form (submit)="submitAnswer(answer)" class="text-math" autocomplete="off">
+      <form (submit)="submitAnswerObject(answer)" class="text-math" autocomplete="off">
         <ng-container *ngFor="let congruency of exercise.congruences">
           <span class="mx-1">x =</span>
           <b class="mx-1">{{congruency.x}}</b>
           <span class="mx-1"> mod </span>
           <b class="mx-1">{{congruency.m}}</b>
+          <br>
         </ng-container>
         <label>
-          <input #answer autofocus class="input-group-text mx-1" type="text">
+          <input autofocus class="input-group-text mx-1" type="text" [(ngModel)]="answer.x" name="x">
         </label>
+        <span class="mx-1"> mod </span>
+        <label>
+          <input autofocus class="input-group-text mx-1" type="text" [(ngModel)]="answer.m" name="m">
+        </label>
+        <input type="submit" style="visibility: hidden;"/>
       </form>
     </div>
   </div>
@@ -30,6 +36,38 @@
     </div>
     <div *ngIf="!result.correct" class="alert alert-danger">
       Wrong. See the explanation below.
+    </div>
+  </div>
+
+  <div *ngIf="showExplanation" class="my-3">
+    <div class="card">
+
+      <div class="card-header">
+        Explanation: Systematic solution
+      </div>
+
+      <div class="card-body justify-content-center">
+        <div class="mx-4">
+          <div *ngIf="explanationStep.m !== undefined" class="text-math">m = {{explanationStep.m}}</div>
+          <div *ngIf="explanationStep.M !== undefined" class="text-math text-warning">M = {{explanationStep.M}}</div>
+          <div *ngIf="explanationStep.N !== undefined" class="text-math text-info">N = {{explanationStep.N}}</div>
+          <div *ngIf="explanationStep.s !== undefined" class="text-math text-danger">s = {{explanationStep.s}}</div>
+          <div *ngIf="explanationStep.x !== undefined" class="text-math text-success">x = {{explanationStep.x}} mod {{explanationStep.m}}</div>
+        </div>
+
+        <div class="mx-4">
+          <div>Step {{explanationStep.step}}: {{explanationStep.hint.message}}</div>
+        </div>
+      </div>
+
+      <div appAutoFocusOnShow class="card-footer">
+        <button (click)="previousExplanationStep()" [disabled]="previousExplanationStepDisabled" class="btn">
+          ◀ Previous
+        </button>
+        <button (click)="nextExplanationStep()" [disabled]="nextExplanationStepDisabled" class="btn">
+          Next ▶
+        </button>
+      </div>
     </div>
   </div>
 
