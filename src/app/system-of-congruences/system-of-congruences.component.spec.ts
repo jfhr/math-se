@@ -1,6 +1,7 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { SystemOfCongruencesComponent } from './system-of-congruences.component';
+import {SystemOfCongruencesComponent} from './system-of-congruences.component';
+import {SystemOfCongruencesGenerator} from './services/system-of-congruences-generator';
 
 describe('SystemOfCongruencesComponent', () => {
   let component: SystemOfCongruencesComponent;
@@ -8,9 +9,10 @@ describe('SystemOfCongruencesComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SystemOfCongruencesComponent ]
+      declarations: [SystemOfCongruencesComponent],
+      providers: [SystemOfCongruencesGenerator]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
