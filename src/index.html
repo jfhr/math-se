@@ -11,7 +11,7 @@
   <script>
       function loadCss() {
           let theme = new URLSearchParams(location.search).get('theme');
-          let url = 'assets';
+          let url = 'https://jfhr.de/assets';
           if (theme === 'dark') {
               // make it dark immediately to avoid white flash while css is loading
               document.addEventListener('load', () => document.body.style.background = "rgb(41,41,41)");
