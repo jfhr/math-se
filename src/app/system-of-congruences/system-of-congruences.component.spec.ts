@@ -3,7 +3,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {SystemOfCongruencesComponent} from './system-of-congruences.component';
 import {SystemOfCongruencesGenerator} from './services/system-of-congruences-generator';
 
-describe('SystemOfCongruencesComponent', () => {
+describe('System of congruences component', () => {
   let component: SystemOfCongruencesComponent;
   let fixture: ComponentFixture<SystemOfCongruencesComponent>;
 

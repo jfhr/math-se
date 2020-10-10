@@ -10,10 +10,10 @@ describe('System of congruences generator', () => {
 
   it('should return a correct result', () => {
     const {exercise} = target.generateExercise();
-    const {x, m} = exercise.result;
+    const {x} = exercise.result;
 
     for (const c of exercise.congruences) {
-      expect(x % m).toEqual(c.x);
+      expect(x % c.m).toEqual(c.x);
     }
   });
 
