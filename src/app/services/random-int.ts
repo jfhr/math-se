@@ -1,6 +1,6 @@
-export function randomInt(lowerLimit: number, upperLimit: number) {
-  if (lowerLimit >= upperLimit) {
+export function randomInt(lowerInclusiveLimit: number, upperExclusiveLimit: number) {
+  if (lowerInclusiveLimit >= upperExclusiveLimit) {
     return NaN;
   }
-  return Math.floor(Math.random() * (upperLimit - lowerLimit)) + lowerLimit;
+  return Math.floor(Math.random() * (upperExclusiveLimit - lowerInclusiveLimit)) + lowerInclusiveLimit;
 }

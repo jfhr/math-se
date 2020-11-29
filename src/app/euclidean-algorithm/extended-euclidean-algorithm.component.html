@@ -8,27 +8,27 @@
 
   <div *ngIf="showExercise" class="input-group my-3">
     <div class="col-form-label">
-      <form (submit)="submitAnswer()" class="text-math" autocomplete="off">
+      <form (submit)="submitAnswerObject(answer)" class="text-math" autocomplete="off">
         <span class="mx-1">gcd(</span>
         <b class="mx-1">{{ exercise.firstNumber }}</b>
         <span class="mx-1">,</span>
         <b class="mx-1">{{ exercise.secondNumber }}</b>
         <span class="mx-1">) =</span>
         <label>
-          <input [(ngModel)]="answerGcd" autofocus class="input-group-text mx-1" type="text" name="answerGcd">
+          <input [(ngModel)]="answer.gcd" autofocus class="input-group-text mx-1" type="text" name="answerGcd">
         </label>
         <br>
 
         <span class="mx-1">{{ exercise.firstNumber }}</span>
         <span class="mx-1">*</span>
         <label>
-          <input [(ngModel)]="answerX" class="input-group-text mx-1" type="text" name="answerX">
+          <input [(ngModel)]="answer.x" class="input-group-text mx-1" type="text" name="answerX">
         </label>
         <span class="mx-1">+</span>
         <span class="mx-1">{{ exercise.secondNumber }}</span>
         <span class="mx-1">*</span>
         <label>
-          <input [(ngModel)]="answerY" class="input-group-text mx-1" type="text" name="answerY">
+          <input [(ngModel)]="answer.y" class="input-group-text mx-1" type="text" name="answerY">
         </label>
         <span class="mx-1">=</span>
         <span class="mx-1">gcd(</span>
@@ -55,7 +55,7 @@
     <div class="card">
 
       <div class="card-header">
-        Explanation: pen-and-paper addition
+        Explanation: Extended euclidean algorithm
       </div>
 
       <div class="card-body justify-content-center">

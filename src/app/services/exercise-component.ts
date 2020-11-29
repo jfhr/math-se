@@ -140,6 +140,20 @@ export abstract class ExerciseComponent<TExercise, TExplanationStep> implements 
     return false;
   }
 
+  /**
+   * Reads the answer from an object and shows the result and explanation.
+   */
+  public submitAnswerObject(answer): boolean {
+    if (this.showExercise && this.exercise !== undefined) {
+      this.result = this.generator.getResult(this.exercise, answer);
+
+      this.resetExplanationStep();
+      this.showResult = true;
+      this.showExplanation = true;
+    }
+    return false;
+  }
+
   protected resetExplanationStep() {
     this.explanationStepIndex = 0;
     this.explanationStep = this.explanation.steps[0];
