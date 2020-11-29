@@ -1,4 +1,4 @@
-import {Answer, Generator, Result} from '../../services/exercise-component';
+import {Answer, Digit, Generator, Result} from '../../services/exercise-component';
 import {randomInt} from '../../services/random-int';
 import {gcd} from '../../services/gcd';
 import {mulInverse} from '../../services/mul-inverse';
@@ -20,12 +20,50 @@ export class SystemOfCongruencesGenerator extends Generator<SystemOfCongruencesE
     const und = {m: undefined, M: undefined, N: undefined, s: undefined, x: undefined};
 
     const explanationSteps: SystemOfCongruencesExplanationStep[] = [
-      {...und, step: 0, hint: {message: 'Check to make sure all modulo values are pairwise prime'}},
-      {...und, m, step: 1, hint: {message: 'The value of m is the product of all modulo values'}},
-      {...und, m, M, step: 2, hint: {message: 'For each term, the value of M is m divided by that terms modulo value'}},
-      {...und, m, M, N, step: 3, hint: {message: 'For each term, N is the multiplicative inverse of M modulo that terms modulo value'}},
-      {...und, m, M, N, s, step: 4, hint: {message: 'For each term, multiply x, M and N, and add those values together to get s'}},
-      {m, M, N, s, x, step: 5, hint: {message: 'The possible values of x are given by s modulo m'}},
+      {...und, step: 0, hint: [{message: 'Check to make sure all modulo values are pairwise prime'}]},
+      {
+        ...und, m, step: 1, hint: [
+          {message: 'The value of '},
+          {d: {isVisible: true, cssClass: 'text-success', value: 'm'}},
+          {message: ' is the product of all modulo values'},
+        ]
+      },
+      {
+        ...und, m, M, step: 2, hint: [
+          {message: 'For each term, the value of '},
+          {d: {isVisible: true, cssClass: 'text-warning', value: 'M'}},
+          {message: ' is '},
+          {d: {isVisible: true, cssClass: 'text-success', value: 'm'}},
+          {message: ' divided by that terms modulo value'},
+        ]
+      },
+      {
+        ...und, m, M, N, step: 3, hint: [
+          {message: 'For each term, '},
+          {d: {isVisible: true, cssClass: 'text-info', value: 'N'}},
+          {message: ' is the multiplicative inverse of '},
+          {d: {isVisible: true, cssClass: 'text-warning', value: 'M'}},
+          {message: ' modulo that terms modulo value'},
+        ]
+      },
+      {
+        ...und, m, M, N, s, step: 4, hint: [
+          {message: 'For each term, multiply x, '},
+          {d: {isVisible: true, cssClass: 'text-warning', value: 'M'}},
+          {message: ' and '},
+          {d: {isVisible: true, cssClass: 'text-info', value: 'N'}},
+          {message: ', and add those values together to get '},
+          {d: {isVisible: true, cssClass: 'text-danger', value: 's'}},
+        ]
+      },
+      {
+        m, M, N, s, x, step: 5, hint: [
+          {message: 'The possible values of x are given by '},
+          {d: {isVisible: true, cssClass: 'text-danger', value: 's'}},
+          {message: ' modulo '},
+          {d: {isVisible: true, cssClass: 'text-success', value: 'm'}},
+        ]
+      },
     ];
 
     return {
@@ -101,7 +139,12 @@ export interface SystemOfCongruencesExplanationStep {
   step: number;
 
   /** A hint displayed for the current step */
-  hint: { message: string };
+  hint: SystemOfCongruencesExplanationStepHintPart[];
+}
+
+export interface SystemOfCongruencesExplanationStepHintPart {
+  message?: string;
+  d?: Digit;
 }
 
 export interface SystemOfCongruencesAnswer extends Answer {

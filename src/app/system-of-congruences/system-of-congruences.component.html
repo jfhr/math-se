@@ -10,7 +10,7 @@
 
   <div *ngIf="showExercise" class="input-group my-3">
     <div class="col-form-label">
-      <form (submit)="submitAnswerObject(answer)" class="text-math" autocomplete="off">
+      <form (submit)="submitAnswerObject(answer)" autocomplete="off" class="text-math">
         <ng-container *ngFor="let congruency of exercise.congruences">
           <span class="mx-1">x =</span>
           <b class="mx-1">{{congruency.x}}</b>
@@ -19,13 +19,13 @@
           <br>
         </ng-container>
         <label>
-          <input autofocus class="input-group-text mx-1" type="text" [(ngModel)]="answer.x" name="x">
+          <input [(ngModel)]="answer.x" autofocus class="input-group-text mx-1" name="x" type="text">
         </label>
         <span class="mx-1"> mod </span>
         <label>
-          <input autofocus class="input-group-text mx-1" type="text" [(ngModel)]="answer.m" name="m">
+          <input [(ngModel)]="answer.m" autofocus class="input-group-text mx-1" name="m" type="text">
         </label>
-        <input type="submit" style="visibility: hidden;"/>
+        <input style="visibility: hidden;" type="submit"/>
       </form>
     </div>
   </div>
@@ -47,16 +47,55 @@
       </div>
 
       <div class="card-body justify-content-center">
-        <div class="mx-4">
-          <div *ngIf="explanationStep.m !== undefined" class="text-math">m = {{explanationStep.m}}</div>
-          <div *ngIf="explanationStep.M !== undefined" class="text-math text-warning">M = {{explanationStep.M}}</div>
-          <div *ngIf="explanationStep.N !== undefined" class="text-math text-info">N = {{explanationStep.N}}</div>
-          <div *ngIf="explanationStep.s !== undefined" class="text-math text-danger">s = {{explanationStep.s}}</div>
-          <div *ngIf="explanationStep.x !== undefined" class="text-math text-success">x = {{explanationStep.x}} mod {{explanationStep.m}}</div>
+        <div class="mx-4 text-math">
+          <div *ngIf="explanationStep.m !== undefined" class="mt-1">
+            <span class="text-success">m</span>
+            = <span class="text-success">{{explanationStep.m}}</span>
+          </div>
+          <div *ngIf="explanationStep.M !== undefined" class="mt-1">
+            <div *ngFor="let M of explanationStep.M; index as i">
+              <span class="text-warning">M<sub>{{i}}</sub></span>
+              ≡ <span class="text-success">{{explanationStep.m}}</span>
+              / {{exercise.congruences[i].m}}
+              ≡ <span class="text-warning">{{M}}</span>
+            </div>
+          </div>
+          <div *ngIf="explanationStep.N !== undefined" class="mt-1">
+            <div *ngFor="let N of explanationStep.N; index as i">
+              <span class="text-info">N<sub>{{i}}</sub></span>
+              ≡ <span class="text-warning">{{explanationStep.M[i]}}</span><sup>-1</sup>
+              mod {{exercise.congruences[i].m}}
+              ≡ <span class="text-info">{{N}}</span>
+            </div>
+          </div>
+          <div *ngIf="explanationStep.s !== undefined" class="mt-1">
+            <span class="text-danger">s</span>
+            =
+            <ng-container *ngFor="let c of exercise.congruences; index as i">
+              <span>{{c.x}}</span>
+              · <span class="text-warning">{{explanationStep.M[i]}}</span>
+              · <span class="text-info">{{explanationStep.N[i]}}</span>
+              <ng-container *ngIf="i < exercise.congruences.length - 1">
+                +
+              </ng-container>
+            </ng-container>
+            = <span class="text-danger">{{explanationStep.s}}</span>
+          </div>
+          <div *ngIf="explanationStep.x !== undefined" class="mt-1">
+            x ≡ <span class="text-danger">{{explanationStep.s}}</span>
+            mod <span class="text-success">{{explanationStep.m}}</span>
+            ≡ <span class="text-danger">{{explanationStep.x}}</span>
+            mod <span class="text-success">{{explanationStep.m}}</span>
+          </div>
         </div>
 
-        <div class="mx-4">
-          <div>Step {{explanationStep.step}}: {{explanationStep.hint.message}}</div>
+        <div class="mx-4 mt-1">
+          <div>Step {{explanationStep.step}}:
+            <ng-container *ngFor="let part of explanationStep.hint">
+              <span *ngIf="part.message !== undefined">{{part.message}}</span>
+              <app-digit *ngIf="part.message === undefined" [d]="part.d"></app-digit>
+            </ng-container>
+          </div>
         </div>
       </div>
 
@@ -69,6 +108,10 @@
         </button>
       </div>
     </div>
+  </div>
+
+  <div class="my-3">
+    <div (click)="newExercise()" class="btn btn-secondary">New exercise</div>
   </div>
 
 </div>
