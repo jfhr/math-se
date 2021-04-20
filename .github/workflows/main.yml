@@ -53,6 +53,6 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
-          source: "dist/minesweeper/*"
-          target: "/var/www/minesweeper/"
+          source: "dist/math-se/*"
+          target: "/var/www/math-se/"
           strip_components: 2
