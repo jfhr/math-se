@@ -45,3 +45,14 @@ jobs:
           
       - name: Run unit tests
         run: ng test
+        
+      - name: Deploy to server
+        uses: appleboy/scp-action@v0.0.1
+        with:
+          host: jfhr.de
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.PORT }}
+          source: "dist/minesweeper/*"
+          target: "/var/www/minesweeper/"
+          strip_components: 2
