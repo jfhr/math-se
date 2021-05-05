@@ -41,8 +41,9 @@ const appRoutes: Routes = [
   imports: [
     BrowserModule,
     RouterModule.forRoot(appRoutes, {
-      paramsInheritanceStrategy: 'always',
-    }),
+    paramsInheritanceStrategy: 'always',
+    relativeLinkResolution: 'legacy'
+}),
     FormsModule
   ],
   providers: [
