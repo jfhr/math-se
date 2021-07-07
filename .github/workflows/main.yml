@@ -45,3 +45,14 @@ jobs:
           
       - name: Run unit tests
         run: ng test
+        
+      - name: Deploy to server
+        uses: appleboy/scp-action@master
+        with:
+          host: jfhr.de
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.PORT }}
+          source: "dist/math-se/*"
+          target: "/var/www/math-se/"
+          strip_components: 2
