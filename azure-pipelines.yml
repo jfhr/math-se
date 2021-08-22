@@ -12,7 +12,7 @@ pool:
 steps:
 - task: NodeTool@0
   inputs:
-    versionSpec: '10.x'
+    versionSpec: '14.x'
   displayName: 'Install Node.js'
 
 - task: Npm@1
@@ -25,6 +25,11 @@ steps:
       npm install -g @angular/cli
       ng build --prod
   displayName: 'Build'
+- task: CmdLine@2
+  inputs:
+    script: |
+      ng test
+  displayName: 'Test'
 - task: CopyFilesOverSSH@0
   inputs:
     sshEndpoint: 'powersrvr connection'
